@@ -1,0 +1,1 @@
+Data file too big to push to github. Download [here](https://www.kaggle.com/delayedkarma/impressionist-classifier-data) and upload in this folder if you want to run the script.
