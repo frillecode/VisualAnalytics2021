@@ -9,7 +9,8 @@ The cover of a book often provides the first impression on potential readers and
 
 For this project, I have used a dataset which consists of image files of book covers scraped from [Book Depository](https://www.bookdepository.com/) divided into different genres. The dataset can be downloaded here: https://www.kaggle.com/lukaanicin/book-covers-dataset?select=book-covers.  
 
-An example of book covers from different genres:
+An example of book covers from different genres:  
+
 ![example_covers](../../figures/project4_cover_examples.png)
 
 
