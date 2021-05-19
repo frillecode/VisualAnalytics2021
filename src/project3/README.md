@@ -36,8 +36,8 @@ Based on this data, a deep learning model using convolutional neural networks (C
 | activation (Activation) | (None, 200, 200, 32) | 0 |
 | flatten (Flatten) | (None, 1280000) | 0 |
 | dense (Dense) | (None, 10) | 12800010 |
-| activation_1 (Activation) | (None, 10) | 0 |
----
+| activation_1 (Activation) | (None, 10) | 0 |  
+
 _Total params: 12,800,906_  
 _Trainable params: 12,800,906_  
 _Non-trainable params: 0_  
@@ -89,5 +89,5 @@ $ python3 cnn-artists.py --help
 
 ## Discussion of results  
 The resulting output-files from running the script can be found in 'out/'. Here, you see the learning curves from running the script with 40 epochs and a batch size of 32:   
-![results](../../figures/project3_results.png)
+![results](../../figures/project3_results.png)  
 The CNN model had a weighted average accuracy of 34% with f1-scores varying from 0.22 to 0.49 between the respective artists. These results suggest that the model was not successful in classifying paintings by their artists. Looking at the learning curves (see figure above), we see that the training loss decreases quite rapidly and hits 0 after 23 epochs, whereas the validation loss fluctuates and increases after approximately 6 epochs. The training accuracy increases until 15 epochs whereafter it plateaus. The training and validation accuracy diverges after approximtely 5 epochs with the validation accuracy not increasing thereafter. This suggests that the model might suffer from overfitting and that it does not generalize very well.     
