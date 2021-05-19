@@ -48,7 +48,7 @@ The model was compiled using a stochastic gradient descent (SGD) optimizer and t
 
 ## Usage
 The structure of the files belonging to this assignment is as follows:  
-  - Data: File too big to push to github. Download [here](https://www.kaggle.com/delayedkarma/impressionist-classifier-data) and upload to _../../data/assignment5/_.
+  - Data: File too big to push to github. Download [here](https://www.kaggle.com/delayedkarma/impressionist-classifier-data) and upload to _../../data/project3/_.
   - Code: _cnn-artists.py_  
   - Results: _out/_
 
@@ -89,5 +89,8 @@ $ python3 cnn-artists.py --help
 
 ## Discussion of results  
 The resulting output-files from running the script can be found in 'out/'. Here, you see the learning curves from running the script with 40 epochs and a batch size of 32:   
-![results](../../figures/project3_results.png)  
+<p align="center">
+    <img src="../../figures/project3_results.png" alt="Logo" width="400" height="300">
+  <p>  
+   
 The CNN model had a weighted average accuracy of 34% with f1-scores varying from 0.22 to 0.49 between the respective artists. These results suggest that the model was not successful in classifying paintings by their artists. Looking at the learning curves (see figure above), we see that the training loss decreases quite rapidly and hits 0 after 23 epochs, whereas the validation loss fluctuates and increases after approximately 6 epochs. The training accuracy increases until 15 epochs whereafter it plateaus. The training and validation accuracy diverges after approximtely 5 epochs with the validation accuracy not increasing thereafter. This suggests that the model might suffer from overfitting and that it does not generalize very well.     

@@ -11,7 +11,9 @@ For this project, I have used a dataset which consists of image files of book co
 
 An example of book covers from different genres:  
 
-![example_covers](../../figures/project4_cover_examples.png)
+<p align="center">
+    <img src="../../figures/project4_cover_examples.png" alt="Logo" width="200" height="200">
+  <p>
 
 
 ## Methods
@@ -25,8 +27,12 @@ First, some preprocessing was done to get the image data into the correct format
 5) binarize label
 
 A deep learning model using convolutional neural networks (CNN) to classify the genre of the book covers was created using _tensorflow_ with _keras_. I used a pretrained model from [VGG-16](https://keras.io/api/applications/vgg/) trained on the [ImageNet](https://image-net.org/) data set. The architecture of the VGG-16 model is depicted below: 
-  
-![vgg16](../../figures/vgg16_architecture.png)*Image borrowed from: https://neurohive.io/en/popular-networks/vgg16/*. 
+
+<p align="center">
+    <img src="../../figures/vgg16_architecture.png" alt="Logo" width="400" height="300">
+  <p>   
+
+*Image borrowed from: https://neurohive.io/en/popular-networks/vgg16/*
 
 The data is passed through a series of convolutional layers along with five max-pooling layers. A flatten layer is added followed by fully-connected classification layers (first with a "ReLU"-activation function, second with a "softmax" activation layer). To reduce overfitting, a dropout layer with a dropout rate of 20% was added. Thus, we ended up with the following network architecture: 
 
@@ -66,7 +72,7 @@ The model was compiled using an _Adam_-optimizer and the loss-function "categori
 
 ## Usage
 The structure of the files belonging to this assignment is as follows:  
-  - Data: File too big to push to github. Download [here](https://www.kaggle.com/lukaanicin/book-covers-dataset?select=book-covers ) and upload to _../../data/final_project/_.
+  - Data: File too big to push to github. Download [here](https://www.kaggle.com/lukaanicin/book-covers-dataset?select=book-covers ) and upload to _../../data/project4/_.
   - Code: _book_covers.py_  
   - Results: _out/_
 
@@ -112,30 +118,22 @@ $ python3 book_covers.py --help
 
 ## Discussion of results   
 The resulting output-files from running the script can be found in 'out/'. Running a model with a fully-connected classification layer at the end of a pretrained CNN (VGG-16) resulted in a weighted average accuracy score of 40%. Here, you see the learning curves from running the model with 20 epochs and a batch size of 128:
-![results](../../figures/project4_results.png) 
 
+<p align="center">
+    <img src="../../figures/project4_results.png" alt="Logo" width="400" height="300">
+  <p>   
+ 
 
 It seems that the model is slowly learning with the training and validation loss decreasing and the training and validation accuracy slowly increasing as more epochs are being run. This suggest that the model has not finished learning and might benefit from more data and training time. However, using a higher number of epochs comes with the risk of overfitting. Though the training and validation curves are relatively close together, it also seems that the validation and training loss are slowly starting to diverge as the number of epochs increase, suggesting a slight overfit. Therefore, acquiring more data might be the optimal solution. After tweaking different parameters such as learning rate and number epochs, this seemed to be the best balance I could find between over- and underfitting under the computational constraints of this project. 
 
-To test the model on a new, unseen image, I downloaded a book cover of a childrens-book which was not in the original dataset: 
-![new_cover](../../figures/project4_unseen.jpeg)*Source: [Amazon](https://www.amazon.com/If-Animals-Kissed-Good-Night/dp/0374300216?ref_=Oct_s9_apbd_obs_hd_bw_blq&pf_rd_r=80T26NGDQ9FJ1SXAB4VN&pf_rd_p=4bc9607f-0546-55f9-85d5-8de6d48b6e00&pf_rd_s=merchandised-search-10&pf_rd_t=BROWSE&pf_rd_i=2966)*
+To test the model on a new, unseen image, I downloaded a book cover of a childrens-book which was not in the original dataset (source: [Amazon](https://www.amazon.com/If-Animals-Kissed-Good-Night/dp/0374300216?ref_=Oct_s9_apbd_obs_hd_bw_blq&pf_rd_r=80T26NGDQ9FJ1SXAB4VN&pf_rd_p=4bc9607f-0546-55f9-85d5-8de6d48b6e00&pf_rd_s=merchandised-search-10&pf_rd_t=BROWSE&pf_rd_i=2966)): 
 
-This yielded the following probabilites for each of the classes:
+<p align="center">
+    <img src="../../figures/project4_unseen.jpeg" alt="Logo" width="200" height="200">
+  <p>   
 
-Class (genre) | | 
-|---|---|
-Business-Finance-Law | 0.0 | 
-Childrens-Books | 1.0 |
-Crime-Thriller | 0.0 |
-Dictionaries-Languages | |
-Food-Drink | |
-History-Archaeology | |
-Medical | |
-Romance | |
-Science-Fiction-Fantasy-Horror | |
-Teen-Young-Adult | |
+For this image, the model performed quite successfully and predicted the class 'Childrens-Book' as having the highest probability. 
 
-  
 Besides computational constraints when fitting the model, there are a few general issues to consider when attempting to classify genres based on book covers. First of all, covers can be ambiguous and one book may have different covers depending on the publisher. Secondly, genres can be overarching. Because this dataset has been scraped from the assigned genres of the website, there is some overlap. For example, the book "Harry Potter and the Cursed Child" is present in both _Childrens-Books_, _Science-Fiction-Fantasy-Horror_, and _Teen-Young-Adult_. In addition, the VGG-16 model has been trained on images, whereas many book covers are illustrations. These issues might explain parts of the difficulties of the model in predicting the genres based on covers.   
 
 As there might be a natural limit as to how much the model can extract about genres from the covers, interesting future work could be to combine this with an analysis of the titles of the books.

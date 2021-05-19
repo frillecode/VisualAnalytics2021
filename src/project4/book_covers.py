@@ -185,7 +185,7 @@ class CNN_books():
             # Predict the probability across all output classes
             unseen_pred = self.model.predict(image) 
             unseen_pred_classes = list(zip(self.labelNames, unseen_pred[0]))
-            
+
             # Print class and predictions in terminal
             print(unseen_pred_classes)
 
