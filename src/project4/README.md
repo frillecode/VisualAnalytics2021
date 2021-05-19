@@ -54,8 +54,8 @@ global_average_pooling2d (Gl | (None, 512) | 0 |
 flatten (Flatten) | (None, 512) | 0 |
 dense (Dense) | (None, 256) | 131328 |
 dropout (Dropout) | (None, 256) | 0 |
-dense_1 (Dense) | (None, 12) | 3084 |
----
+dense_1 (Dense) | (None, 12) | 3084 |  
+
 _Total params: 14,848,586_  
 _Trainable params: 133,898_  
 _Non-trainable params: 14,714,688_  
@@ -133,7 +133,6 @@ Medical | |
 Romance | |
 Science-Fiction-Fantasy-Horror | |
 Teen-Young-Adult | |
-|||
 
   
 Besides computational constraints when fitting the model, there are a few general issues to consider when attempting to classify genres based on book covers. First of all, covers can be ambiguous and one book may have different covers depending on the publisher. Secondly, genres can be overarching. Because this dataset has been scraped from the assigned genres of the website, there is some overlap. For example, the book "Harry Potter and the Cursed Child" is present in both _Childrens-Books_, _Science-Fiction-Fantasy-Horror_, and _Teen-Young-Adult_. In addition, the VGG-16 model has been trained on images, whereas many book covers are illustrations. These issues might explain parts of the difficulties of the model in predicting the genres based on covers.   
