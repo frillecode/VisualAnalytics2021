@@ -1,0 +1,2 @@
+### Data folder for project 1  
+The script will use the "_We_Hold_These_Truths__at_Jefferson_Memorial_IMG_4729.jpeg"-file as default. If you want to use other image files, put them in this folder and specify the filename in the command-line when running the script. 

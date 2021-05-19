@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-VENVNAME=frille-vis
+VENVNAME=cds-vis
 jupyter kernelspec uninstall $VENVNAME
 rm -r $VENVNAME

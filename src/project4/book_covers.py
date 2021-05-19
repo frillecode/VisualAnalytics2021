@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-import os
+import sys, os
+sys.path.append(os.path.join("..", ".."))
 import cv2
 import argparse
 import pandas as pd
@@ -26,6 +27,7 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.applications.vgg16 import (preprocess_input,
                                                  decode_predictions,
                                                  VGG16)
+
 
 
 class CNN_books():
@@ -95,7 +97,8 @@ class CNN_books():
         # Add new classifier layers
         flat1 = Flatten()(self.model.layers[-1].output)
         class1 = Dense(256, activation='relu')(flat1)
-        output = Dense(12, activation='softmax')(class1)
+        drop1 = Dropout(0.2)(class1)
+        output = Dense(10, activation='softmax')(drop1)
 
         # Define new model
         self.model = Model(inputs=self.model.inputs, 
@@ -159,6 +162,33 @@ class CNN_books():
         plot_path = os.path.join("out", "performance.png")
         plt.savefig(plot_path, dpi=300, bbox_inches="tight")
 
+
+    def predict_unseen(self):
+        """Function which imports a new image and predicts its class using the model
+        """
+        if self.args['unseen_image'] is not None:
+            # Loading the test image
+            test_image = cv2.imread(os.path.join("..", "..", "data", "project4", "unseen_images", self.args['unseen_image'])) 
+            
+            # Compressing the size of the test image into a smaller pixel format
+            compressed = cv2.resize(test_image, (224, 224), interpolation = cv2.INTER_AREA) 
+
+            # Turn into numpy array 
+            compressed_array = np.array(compressed)
+
+            # Normalise data
+            compressed_array = compressed_array.astype("float")/255.0
+
+            # Reshape data for the model
+            image = compressed.reshape((1, compressed.shape[0], compressed.shape[1], compressed.shape[2]))
+            
+            # Predict the probability across all output classes
+            unseen_pred = self.model.predict(image) 
+            unseen_pred_classes = list(zip(self.labelNames, unseen_pred[0]))
+            
+            # Print class and predictions in terminal
+            print(unseen_pred_classes)
+
 def main():
     ap = argparse.ArgumentParser(description="[INFO] This script takes image data, creates a convolutional neural network model using a pretrained VGG-16 model, and saves the results of the model")
     # Argument for specifying number of epochs
@@ -166,7 +196,7 @@ def main():
                 "--epochs", 
                 required=False, 
                 type=int, 
-                default=10, 
+                default=20, 
                 help="int, number of epochs") 
     # Argument for specifying batch size
     ap.add_argument("-bs", 
@@ -174,15 +204,22 @@ def main():
                 required=False, 
                 type=int, 
                 default=128, 
-                help="int, batch size")     
+                help="int, batch size") 
+    # Argument for specifying new image to 
+    ap.add_argument("-ui", 
+                "--unseen_image", 
+                required=False, 
+                type=str, 
+                default=None, 
+                help="str, filename of unseen image to predict (file must be located in ../../data/project4/)")         
     
     args = vars(ap.parse_args())
     
     
-    # Run 
+    # Run all
     convNN = CNN_books(args)
     print("[INFO] Loading and preprocessing data")
-    convNN.preprocessing(os.path.join("..", "..", "data", "final_project", "book-covers"))
+    convNN.preprocessing(os.path.join("..", "..", "data", "project4", "book-covers"))
     print("[INFO] Creating model")
     summary = convNN.create_model()
     print(summary)
@@ -191,6 +228,8 @@ def main():
     cm = convNN.eval_model()
     print(f"[INFO] Classification report: \n {cm}")
     convNN.plot_history()
+    print(f"[INFO] Using model to predict class of new image:")
+    convNN.predict_unseen()
 
 # Define behaviour when called from command line
 if __name__=="__main__":

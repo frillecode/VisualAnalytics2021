@@ -186,8 +186,8 @@ def main():
     # Run 
     convNN = convolutionalNeuralNetwork(args)
     print("[INFO] Loading and preprocessing data")
-    convNN.preprocessing(train_folder = os.path.join("..", "..", "data", "assignment5", "training", "training"), 
-                         test_folder = os.path.join("..", "..", "data", "assignment5", "validation", "validation"))
+    convNN.preprocessing(train_folder = os.path.join("..", "..", "data", "project3", "training", "training"), 
+                         test_folder = os.path.join("..", "..", "data", "project3", "validation", "validation"))
     print("[INFO] Creating model")
     summary = convNN.create_model()
     print(summary)

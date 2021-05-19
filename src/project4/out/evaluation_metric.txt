@@ -1,18 +1,16 @@
                                 precision    recall  f1-score   support
 
-          Business-Finance-Law       0.33      0.48      0.39       198
-               Childrens-Books       0.34      0.29      0.31       189
-                Crime-Thriller       0.36      0.52      0.42       187
-        Dictionaries-Languages       0.58      0.17      0.26       200
-                    Food-Drink       0.43      0.41      0.42       187
-           History-Archaeology       0.19      0.21      0.20       182
-                       Medical       0.23      0.33      0.27       203
-              Mind-Body-Spirit       0.24      0.25      0.24       207
-                  Poetry-Drama       0.22      0.19      0.21       203
-                       Romance       0.37      0.20      0.26       214
-Science-Fiction-Fantasy-Horror       0.29      0.31      0.30       204
-              Teen-Young-Adult       0.25      0.26      0.25       197
+          Business-Finance-Law       0.37      0.43      0.40       210
+               Childrens-Books       0.45      0.40      0.43       177
+                Crime-Thriller       0.43      0.58      0.49       221
+        Dictionaries-Languages       0.37      0.35      0.36       178
+                    Food-Drink       0.67      0.54      0.59       226
+           History-Archaeology       0.29      0.40      0.34       194
+                       Medical       0.43      0.28      0.34       212
+                       Romance       0.39      0.32      0.35       197
+Science-Fiction-Fantasy-Horror       0.31      0.39      0.35       179
+              Teen-Young-Adult       0.32      0.24      0.28       181
 
-                      accuracy                           0.30      2371
-                     macro avg       0.32      0.30      0.29      2371
-                  weighted avg       0.32      0.30      0.29      2371
+                      accuracy                           0.40      1975
+                     macro avg       0.40      0.39      0.39      1975
+                  weighted avg       0.41      0.40      0.40      1975
