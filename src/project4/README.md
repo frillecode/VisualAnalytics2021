@@ -26,13 +26,11 @@ First, some preprocessing was done to get the image data into the correct format
 4) transform data to numpy array
 5) binarize label
 
-A deep learning model using convolutional neural networks (CNN) to classify the genre of the book covers was created using _tensorflow_ with _keras_. I used a pretrained model from [VGG-16](https://keras.io/api/applications/vgg/) trained on the [ImageNet](https://image-net.org/) data set. The architecture of the VGG-16 model is depicted below: 
+A deep learning model using convolutional neural networks (CNN) to classify the genre of the book covers was created using _tensorflow_ with _keras_. I used a pretrained model from VGG-16 (Zhang et al., 2015) trained on the [ImageNet](https://image-net.org/) data set. The architecture of the VGG-16 model is depicted below (Hassan, 2018): 
 
 <p align="center">
     <img src="../../figures/vgg16_architecture.png" alt="Logo" width="400" height="300">
   <p>   
-
-*Image borrowed from: https://neurohive.io/en/popular-networks/vgg16/*
 
 The data is passed through a series of convolutional layers along with five max-pooling layers. A flatten layer is added followed by fully-connected classification layers (first with a "ReLU"-activation function, second with a "softmax" activation layer). To reduce overfitting, a dropout layer with a dropout rate of 20% was added. Thus, we ended up with the following network architecture: 
 
@@ -126,7 +124,7 @@ The resulting output-files from running the script can be found in 'out/'. Runni
 
 It seems that the model is slowly learning with the training and validation loss decreasing and the training and validation accuracy slowly increasing as more epochs are being run. This suggest that the model has not finished learning and might benefit from more data and training time. However, using a higher number of epochs comes with the risk of overfitting. Though the training and validation curves are relatively close together, it also seems that the validation and training loss are slowly starting to diverge as the number of epochs increase, suggesting a slight overfit. Therefore, acquiring more data might be the optimal solution. After tweaking different parameters such as learning rate and number epochs, this seemed to be the best balance I could find between over- and underfitting under the computational constraints of this project. 
 
-To test the model on a new, unseen image, I downloaded a book cover of a childrens-book which was not in the original dataset (source: [Amazon](https://www.amazon.com/If-Animals-Kissed-Good-Night/dp/0374300216?ref_=Oct_s9_apbd_obs_hd_bw_blq&pf_rd_r=80T26NGDQ9FJ1SXAB4VN&pf_rd_p=4bc9607f-0546-55f9-85d5-8de6d48b6e00&pf_rd_s=merchandised-search-10&pf_rd_t=BROWSE&pf_rd_i=2966)): 
+To test the model on a new, unseen image, I downloaded a book cover of a childrens-book which was not in the original dataset (Paul & Walker, 2015): 
 
 <p align="center">
     <img src="../../figures/project4_unseen.jpeg" alt="Logo" width="200" height="200">
@@ -134,6 +132,14 @@ To test the model on a new, unseen image, I downloaded a book cover of a childre
 
 For this image, the model performed quite successfully and predicted the class 'Childrens-Book' as having the highest probability. 
 
-Besides computational constraints when fitting the model, there are a few general issues to consider when attempting to classify genres based on book covers. First of all, covers can be ambiguous and one book may have different covers depending on the publisher. Secondly, genres can be overarching. Because this dataset has been scraped from the assigned genres of the website, there is some overlap. For example, the book "Harry Potter and the Cursed Child" is present in both _Childrens-Books_, _Science-Fiction-Fantasy-Horror_, and _Teen-Young-Adult_. In addition, the VGG-16 model has been trained on images, whereas many book covers are illustrations. These issues might explain parts of the difficulties of the model in predicting the genres based on covers.   
+Besides computational constraints when fitting the model, there are a few general issues to consider when attempting to classify genres based on book covers. First of all, covers can be ambiguous and one book may have different covers depending on the publisher. Secondly, genres can be overarching. Because this dataset has been scraped from the assigned genres of the website, there is some overlap. For example, the book "Harry Potter and the Cursed Child" is present in both _Childrens-Books_, _Science-Fiction-Fantasy-Horror_, and _Teen-Young-Adult_. In addition, the VGG-16 model has been trained on images, whereas many book covers are illustrations (Zhang et al., 2015). These issues might explain parts of the difficulties of the model in predicting the genres based on covers.   
 
 As there might be a natural limit as to how much the model can extract about genres from the covers, interesting future work could be to combine this with an analysis of the titles of the books.
+
+## References
+      
+Zhang, X., Zou, Z., He, K. & Sun, J., (2015), “Accelerating Very Deep Convolutional Networks for Classification and Detection,” arXiv:1505.06798  
+     
+Hassan, M., (2018), "VGG16 – Convolutional Network for Classification and Detection", Neurohive, https://neurohive.io/en/popular-networks/vgg16/, [Retrieved May 19th 2021]  
+
+Paul, A.W. & Walker, D., (2015), "If Animals Kissed Good Night", Amazon.com, https://www.amazon.com/If-Animals-Kissed-Good-Night/dp/0374300216?ref_=Oct_s9_apbd_obs_hd_bw_blq&pf_rd_r=80T26NGDQ9FJ1SXAB4VN&pf_rd_p=4bc9607f-0546-55f9-85d5-8de6d48b6e00&pf_rd_s=merchandised-search-10&pf_rd_t=BROWSE&pf_rd_i=2966, [Retrieved May 19th 2021]
